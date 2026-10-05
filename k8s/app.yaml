@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: multi-model-inference-platform
+  labels:
+    app: multi-model-inference-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: multi-model-inference-platform
+  template:
+    metadata:
+      labels:
+        app: multi-model-inference-platform
+    spec:
+      containers:
+        - name: api
+          image: multi-model-inference-platform:local
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /v1/readyz
+              port: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: multi-model-inference-platform
+spec:
+  selector:
+    app: multi-model-inference-platform
+  ports:
+    - port: 80
+      targetPort: 8080
