@@ -1,5 +1,12 @@
 # Multi-Model Inference Platform
 
+## Overview
+
+An MLOps lab for serving several models with one champion. The API lets you register a second model with `POST /models`, promote it with `POST /promote` and read the current champion from `GET /champion`, so the served model changes without rolling a cluster. A small registry module tracks the models, and pytest tests run in GitHub Actions.
+
+- **Built with:** Python, pytest, GitHub Actions
+- **Scope:** Local laptop lab; it calls no hosted model and does not apply production changes.
+
 <!-- project-guide:start -->
 ## Project guide
 
